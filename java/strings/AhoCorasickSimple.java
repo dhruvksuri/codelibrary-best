@@ -27,7 +27,7 @@ public class AhoCorasickSimple {
                 }
                 // we are transitions in two ways
                 //   a. ab -> abc, ab -> abd
-                //   b. ab -> bc , ab -> bd 
+                //   b. ab -> bc , ab -> bd  (for this we need to etablish suffix links to parent of ab)
                 transitions[i][j] = prefixMap.get(s);
             }
         }
