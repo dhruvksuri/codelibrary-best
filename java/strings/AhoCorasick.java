@@ -25,15 +25,24 @@ public class AhoCorasick {
 
     public void buildLinks() {
         int[] q = new int[MAX_STATES];
+        
         for (int s = 0, t = 1; s < t;) {
             int v = q[s++];
+            
+            // u -> v ...... u is parent of v
             int u = sufflink[v];
+            
+            // Node is broken but can we reach via Parent by skipping prefix
             if (escape[v] == 0) {
                 escape[v] = escape[u];
             }
             for (int c = 0; c < ALPHABET_SIZE; c++) {
                 if (transitions[v][c] != 0) {
+                    
+                    // we are storing transition node below that is used by s in next iteration
                     q[t++] = transitions[v][c];
+
+                    // transition node link if we skip parent and still reach suffix
                     sufflink[transitions[v][c]] = v != 0 ? transitions[u][c] : 0;
                 } else {
                     transitions[v][c] = transitions[u][c];
