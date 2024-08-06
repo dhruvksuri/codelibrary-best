@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 // https://en.wikipedia.org/wiki/Suffix_array
+// https://medium.com/@florian_algo/introduction-to-suffix-array-9080f9f359ce -> V.IMPPPPPPPPPPPPPPPPPPPPPPPPPPPP
 public class SuffixArray2 {
     // suffix array in O(n*log^2(n))
     public static int[] suffixArray(CharSequence s) {
