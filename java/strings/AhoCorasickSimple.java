@@ -25,6 +25,9 @@ public class AhoCorasickSimple {
                 while (!prefixMap.containsKey(s)) {
                     s = s.substring(1);
                 }
+                // we are transitions in two ways
+                //   a. ab -> abc, ab -> abd
+                //   b. ab -> bc , ab -> bd 
                 transitions[i][j] = prefixMap.get(s);
             }
         }
