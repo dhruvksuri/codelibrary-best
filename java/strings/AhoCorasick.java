@@ -1,6 +1,7 @@
 package strings;
 
 // https://en.wikipedia.org/wiki/Aho–Corasick_algorithm
+// https://codeforces.com/blog/entry/100298
 public class AhoCorasick {
     final int ALPHABET_SIZE = 26;
     final int MAX_STATES = 200_000;
