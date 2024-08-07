@@ -30,20 +30,45 @@ public class SuffixAutomaton {
             st[cur] = new State();
             st[cur].length = i + 1;
             st[cur].firstPos = i;
+            
+            // Parent of newly added child
             int p = last;
+
+            // If Parent doesn't have child then add it
+            // Do this recursively by traversing to the parent
             for (; p != -1 && st[p].next[c] == -1; p = st[p].suffLink) {
+                // Add the index to the current character
                 st[p].next[c] = cur;
             }
+
+            // If parent is root then make suffLink of current to 0
+            // else If parent is not root then c (character) already exists for parent
             if (p == -1) {
                 st[cur].suffLink = 0;
             } else {
+                // Index of the char
                 int q = st[p].next[c];
+
+                
                 if (st[p].length + 1 == st[q].length) {
                     st[cur].suffLink = q;
                 } else {
+                    // abb is an example satisfying below
                     int clone = size++;
                     st[clone] = new State();
                     st[clone].length = st[p].length + 1;
+
+                    /**
+                      public static void arraycopy(Object source_arr, int sourcePos,
+                            Object dest_arr, int destPos, int len)
+                        Parameters : 
+                        source_arr : array to be copied from
+                        sourcePos : starting position in source array from where to copy
+                        dest_arr : array to be copied in
+                        destPos : starting position in destination array, where to copy in
+                        len : total no. of components to be copied.  
+                    */
+                    
                     System.arraycopy(st[q].next, 0, st[clone].next, 0, st[q].next.length);
                     st[clone].suffLink = st[q].suffLink;
                     for (; p != -1 && st[p].next[c] == q; p = st[p].suffLink) {
