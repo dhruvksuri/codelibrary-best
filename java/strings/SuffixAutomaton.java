@@ -38,12 +38,18 @@ public class SuffixAutomaton {
             // Do this recursively by traversing to the parent
             for (; p != -1 && st[p].next[c] == -1; p = st[p].suffLink) {
                 // Add the index to the current character
+                // 0 -> 1
+                // 1 -> 2
+                // 0 -> 2
+                // 2 -> 3
                 st[p].next[c] = cur;
             }
 
             // If parent is root then make suffLink of current to 0
             // else If parent is not root then c (character) already exists for parent
             if (p == -1) {
+                // 1 -> 0
+                // 2 -> 0
                 st[cur].suffLink = 0;
             } else {
                 // Index of the char
@@ -51,11 +57,14 @@ public class SuffixAutomaton {
 
                 
                 if (st[p].length + 1 == st[q].length) {
+                    // abbcb is an example satisfying below
+                    // cur (6) -> q (4)
                     st[cur].suffLink = q;
                 } else {
                     // abb is an example satisfying below
                     int clone = size++;
                     st[clone] = new State();
+                    // Imp
                     st[clone].length = st[p].length + 1;
 
                     /**
@@ -69,12 +78,19 @@ public class SuffixAutomaton {
                         len : total no. of components to be copied.  
                     */
                     
+                    // copy all childs of 2 to 4
                     System.arraycopy(st[q].next, 0, st[clone].next, 0, st[q].next.length);
+
+                    // 2 parent becomes 4 parent
                     st[clone].suffLink = st[q].suffLink;
+
+                    // Since clone is new, Do this recursively by traversing to the parent
                     for (; p != -1 && st[p].next[c] == q; p = st[p].suffLink) {
                         st[p].next[c] = clone;
                     }
+                    // 2 parent becomes 4
                     st[q].suffLink = clone;
+                    // 3 parent becomes 4
                     st[cur].suffLink = clone;
                 }
             }
