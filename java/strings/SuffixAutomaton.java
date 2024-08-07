@@ -3,6 +3,9 @@ package strings;
 import java.util.*;
 
 // https://en.wikipedia.org/wiki/Suffix_automaton
+// Intuitively a suffix automaton can be understood as a compressed form of all substrings of a given string. 
+// An impressive fact is, that the suffix automaton contains all this information in a highly compressed form.
+// https://codeforces.com/blog/entry/20861
 public class SuffixAutomaton {
     public static class State {
         public int length;
