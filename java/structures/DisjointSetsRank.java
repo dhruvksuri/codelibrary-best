@@ -20,10 +20,13 @@ public class DisjointSetsRank {
         if (a == b)
             return;
 
+        // unite smaller component to larger component
+        // This helps in reducing the updates
         if (rank[a] < rank[b]) {
             p[a] = b;
         } else {
             p[b] = a;
+            // a would have more children
             if (rank[a] == rank[b])
                 ++rank[a];
         }
