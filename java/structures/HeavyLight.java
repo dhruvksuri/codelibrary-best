@@ -33,6 +33,8 @@ public class HeavyLight {
         dfs2(0);
     }
 
+    // Below method takes care of identifying heavy subtree of child
+    // and move it to 0th index
     int dfs1(int u) {
         int size = 1;
         int maxSubtree = 0;
@@ -45,15 +47,24 @@ public class HeavyLight {
             int subtree = dfs1(v);
             if (maxSubtree < subtree) {
                 maxSubtree = subtree;
-                tree[u].set(i, tree[u].set(0, v));
+                
+                // Swap ith child & 0th child
+                
+                tree[u].set(i, tree[u].set(0, v));  
+                
+                // tree[u].set(0, v) -> This method returns the element previously at the specified position.
             }
             size += subtree;
         }
         return size;
     }
 
+    // If node is on the heavy path, link it's pathRoot to root parent (i.e 0)
+    // If node is not on the heavy path, link it's pathRoot to itself
     void dfs2(int u) {
         in[u] = time++;
+        // Parent pathRoot[0] = 0
+        // Parent can have only one child point to it as pathRoot
         for (int v : tree[u]) {
             if (v == parent[u])
                 continue;
@@ -79,6 +90,7 @@ public class HeavyLight {
                 u = v;
                 v = t;
             }
+            // v has higher depth
             op.accept(in[pathRoot[v]], in[v]);
         }
         if (u != v || valuesOnVertices)
