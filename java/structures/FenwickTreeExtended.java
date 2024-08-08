@@ -40,7 +40,7 @@ public class FenwickTreeExtended {
     }
 
     ///////////////////////////////////////////////////////
-    // interval add
+    // interval add for Range update point query
     public static void add(int[] t, int a, int b, int value) {
         add(t, a, value);
         add(t, b + 1, -value);
@@ -53,7 +53,7 @@ public class FenwickTreeExtended {
     ///////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////
-    // interval add
+    // interval add for Range update range query
     public static void add(int[] t1, int[] t2, int a, int b, int value) {
         add(t1, a, value);
         add(t1, b, -value);
