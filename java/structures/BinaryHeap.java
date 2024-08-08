@@ -3,9 +3,10 @@ package structures;
 import java.util.*;
 
 // https://en.wikipedia.org/wiki/Binary_heap
+
 // invariant: heap[parent] <= heap[child]
 public class BinaryHeap {
-    int[] heap;
+    int[] heap;  // 0 index based
     int size;
 
     public BinaryHeap(int n) {
@@ -16,6 +17,7 @@ public class BinaryHeap {
     public BinaryHeap(int[] values) {
         heap = values.clone();
         size = values.length;
+        // due to 0 index based => pos = size / 2 - 1
         for (int pos = size / 2 - 1; pos >= 0; pos--) down(pos);
     }
 
@@ -31,13 +33,13 @@ public class BinaryHeap {
         up(size++);
     }
 
-    void up(int pos) {
-        while (pos > 0) {
-            int parent = (pos - 1) / 2;
-            if (heap[pos] >= heap[parent])
+    void up(int child) {
+        while (child > 0) {
+            int parent = (child - 1) / 2;
+            if (heap[parent] <= heap[child])
                 break;
-            swap(pos, parent);
-            pos = parent;
+            swap(child, parent);
+            child = parent;
         }
     }
 
@@ -46,6 +48,8 @@ public class BinaryHeap {
             int child = 2 * pos + 1;
             if (child >= size)
                 break;
+            
+            // Go to the smallest of both childs
             if (child + 1 < size && heap[child + 1] < heap[child])
                 ++child;
             if (heap[pos] <= heap[child])
