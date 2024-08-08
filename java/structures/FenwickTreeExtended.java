@@ -1,5 +1,20 @@
 package structures;
 
+//
+// Fenwick Tree (aka. binary indexed tree)
+//
+// Description:
+//   A data structure that allows 
+//     add(k,a):       b[k] += a
+//     sum(k):         b[0] + ... + b[k-1]
+//     lower_bound(a): min { k : sum(k) >= a }
+//
+// Algorithm:
+//  [                    1000                     ]
+//  [         100         ] [                     ]
+//  [   010   ] [         ] [   110   ] [         ]
+//  [001] [   ] [011] [   ] [101] [   ] [111] [   ]
+
 public class FenwickTreeExtended {
     // T[i] += value
     public static void add(int[] t, int i, int value) {
