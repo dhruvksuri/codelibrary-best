@@ -37,6 +37,8 @@ public class BinaryHeapIndexed {
         changeValue(pos2Id[pos], heap[size]);
     }
 
+    // Clear benefit you get from normal BinaryHeap
+    // In normal BinaryHeap you keep on adding elements unlike below
     public void changeValue(int id, int value) {
         int pos = id2Pos[id];
         if (heap[pos] < value) {
