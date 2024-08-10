@@ -7,6 +7,22 @@ import java.util.stream.Stream;
 
 // Heavy-light decomposition with path queries. Query complexity is O(log^2(n)).
 // Based on the code from http://codeforces.com/blog/entry/22072
+
+/**
+Explanation from https://codeforces.com/blog/entry/81317
+
+How this works?
+    1. You are asked to update some values in the path from point a to point b and query the path sum.
+        Soln:-
+            1. Brute force
+                Best explan - https://www.geeksforgeeks.org/introduction-to-heavy-light-decomposition/
+            2. HeavyLight
+                - You label heavy childs first & create segment tree across consecutive labels
+                    a. ST1 - 0,1,2
+                    b. ST2 - 5,6 & ST3 - 7,8,9,10
+               
+
+*/
 public class HeavyLight {
     List<Integer>[] tree;
     boolean valuesOnVertices; // true - values on vertices, false - values on edges
