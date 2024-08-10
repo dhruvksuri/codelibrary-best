@@ -1,7 +1,7 @@
 package structures;
 
-// Best - https://www.algotree.org/algorithms/sparse_table/
 /**
+Best Explanation - https://www.algotree.org/algorithms/sparse_table/
 void Build_SparseTable (vector<int>& vec, vector<vector<int>>& sparse_table) {
 
     int rows = vec.size();
