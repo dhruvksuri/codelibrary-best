@@ -76,7 +76,8 @@ public class Biconnectivity {
 
                 // compare up of u vs up of v
                 up[u] = Math.min(up[u], up[v]);
-                
+
+                // if (tin[u] > up[v]) - we have exited v before, its not part of SCC 
                 if (tin[u] <= up[v]) {
                     // FWD edge
                     cutPoint = true;
@@ -90,7 +91,7 @@ public class Biconnectivity {
                     vertexBiconnectedComponents.add(component);
                 }
 
-                // Imp
+                // Imp  - v is not visited before 
                 if (tin[u] < up[v]) // or (up[v] == tin[v])
                     bridges.add(new Edge(u, v));
 
@@ -98,12 +99,14 @@ public class Biconnectivity {
                 ++children;
             }
         }
+        
+        // If root and more then one child, then its cutpoint
         if (p == -1)
             cutPoint = children >= 2;
         if (cutPoint)
             cutPoints.add(u);
 
-        // M Imp
+        // M Imp - if u is not visited before then its new SCC
         if (tin[u] == up[u]) {
             List<Integer> component = new ArrayList<>();
             while (true) {
