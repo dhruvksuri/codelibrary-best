@@ -58,6 +58,8 @@ public class MaxFlowDinic {
         for (; ptr[u] < graph[u].size(); ++ptr[u]) {
 
             Edge e = graph[u].get(ptr[u]);
+
+            // Imp - dist[e.t] got filled by the BFS 
             
             if (dist[e.t] == dist[u] + 1 && e.f < e.cap) {
                 int df = dinicDfs(ptr, dest, e.t, Math.min(f, e.cap - e.f));
