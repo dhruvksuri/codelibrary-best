@@ -3,6 +3,7 @@ package graphs.dfs;
 import java.util.*;
 import java.util.stream.Stream;
 
+// https://www.geeksforgeeks.org/biconnected-components/
 public class Biconnectivity {
     static class Edge {
         int u, v;
@@ -54,19 +55,30 @@ public class Biconnectivity {
         stack.add(u);
         int children = 0;
         boolean cutPoint = false;
+
+        // Idea is to identify FWD & BACK edges
         for (int v : graph[u]) {
             if (v == p)
                 continue;
-            if (visited[v]) {
-                if (tin[u] > tin[v]) {
+            // Have we visited v ?
+            if (visited[v]) { //  Yes
+                // Is it a BACK edge?
+                if (tin[u] > tin[v]) { //  Yes
                     stackEdges.add(new Edge(u, v));
                 }
+                // u-v -> go back as much when we visited v
                 up[u] = Math.min(up[u], tin[v]);
             } else {
+                // Tree Edge -  if  v  is visited for the first time and  u  is currently being visited 
                 stackEdges.add(new Edge(u, v));
+                
                 dfs(v, u);
+
+                // compare up of u vs up of v
                 up[u] = Math.min(up[u], up[v]);
+                
                 if (tin[u] <= up[v]) {
+                    // FWD edge
                     cutPoint = true;
                     List<Edge> component = new ArrayList<>();
                     while (true) {
@@ -77,8 +89,12 @@ public class Biconnectivity {
                     }
                     vertexBiconnectedComponents.add(component);
                 }
+
+                // Imp
                 if (tin[u] < up[v]) // or (up[v] == tin[v])
                     bridges.add(new Edge(u, v));
+
+                //Imp
                 ++children;
             }
         }
@@ -86,6 +102,8 @@ public class Biconnectivity {
             cutPoint = children >= 2;
         if (cutPoint)
             cutPoints.add(u);
+
+        // M Imp
         if (tin[u] == up[u]) {
             List<Integer> component = new ArrayList<>();
             while (true) {
