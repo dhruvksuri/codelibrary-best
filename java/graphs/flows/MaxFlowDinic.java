@@ -24,6 +24,8 @@ public class MaxFlowDinic {
     }
 
     public void addEdge(int s, int t, int cap) {
+        // Most Intelligent way of linking s & t by taking snapshot (i.e nodeId) 
+        // w.r.t to  graph[t].size() && graph[s].size() - 1;
         graph[s].add(new Edge(t, graph[t].size(), cap));
         graph[t].add(new Edge(s, graph[s].size() - 1, 0));
     }
@@ -34,6 +36,8 @@ public class MaxFlowDinic {
         int[] q = new int[graph.length];
         int sizeQ = 0;
         q[sizeQ++] = src;
+
+        // Intelligent way of doing level order BFS
         for (int i = 0; i < sizeQ; i++) {
             int u = q[i];
             for (Edge e : graph[u]) {
@@ -49,13 +53,17 @@ public class MaxFlowDinic {
     int dinicDfs(int[] ptr, int dest, int u, int f) {
         if (u == dest)
             return f;
+
+        // Intelligent way of doing DFS
         for (; ptr[u] < graph[u].size(); ++ptr[u]) {
+
             Edge e = graph[u].get(ptr[u]);
+            
             if (dist[e.t] == dist[u] + 1 && e.f < e.cap) {
                 int df = dinicDfs(ptr, dest, e.t, Math.min(f, e.cap - e.f));
                 if (df > 0) {
                     e.f += df;
-                    graph[e.t].get(e.rev).f -= df;
+                    graph[e.t].get(e.rev).f -= df;   // Awesome
                     return df;
                 }
             }
