@@ -99,6 +99,10 @@ public class HeavyLight {
         processPath(u, v, (a, b) -> segmentTree.modify(a, b, delta));
     }
 
+    // We update node from u to LCA & v to LCA alternatively
+    // Whoover has higher depth gets chosen
+    // if u or v is part of heavy chain then entire chain updated till its parent using ST
+    // if u or v is part of light chain then we update till its parent and move up 
     void processPath(int u, int v, BiConsumer<Integer, Integer> op) {
         for (; pathRoot[u] != pathRoot[v]; v = parent[pathRoot[v]]) {
             if (depth[pathRoot[u]] > depth[pathRoot[v]]) {
