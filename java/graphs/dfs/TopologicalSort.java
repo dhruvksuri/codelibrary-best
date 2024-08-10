@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 
 // https://en.wikipedia.org/wiki/Topological_sorting
 public class TopologicalSort {
+    // To identify cycles, you can use color white, silver, black
     static void dfs(List<Integer>[] graph, boolean[] used, List<Integer> order, int u) {
         used[u] = true;
         for (int v : graph[u])
