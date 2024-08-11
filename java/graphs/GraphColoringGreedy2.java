@@ -3,6 +3,9 @@ import java.util.*;
 import java.util.stream.Stream;
 
 /**
+
+Best - https://www.baeldung.com/cs/graph-coloring-constructive-methods
+
 Graph colouring is the task of assigning colours to the vertices of a graph so that:
 1. pairs of adjacent vertices are assigned different colours, and
 2. the number of different colours used across the graph is minimal.
