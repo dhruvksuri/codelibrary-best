@@ -27,10 +27,15 @@ public class BracketSequences {
     */
     public static boolean nextBracketSequence(char[] s) {
         int n = s.length;
+        // right to left
         for (int i = n - 1, balance = 0; i >= 0; i--) {
+            // Reduce count if open bracket & vice versa
             balance += s[i] == '(' ? -1 : 1;
-            if (s[i] == '(' && balance > 0) {
-                --balance;
+
+            // ((()))   converted to (()()) 
+            //   i                     i 
+            if (s[i] == '(' && balance > 0) { // we have more number of close brackets
+                --balance;  // Why? => if you see after conversion, the after balance is 1 (before balance is 2) 
                 int open = (n - i - 1 - balance) / 2;
                 int close = n - i - 1 - open;
                 s[i] = ')';
