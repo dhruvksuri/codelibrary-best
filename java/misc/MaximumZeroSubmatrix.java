@@ -2,34 +2,59 @@ package misc;
 
 import java.util.*;
 
+// https://pastebin.com/wxGVjDvC
 public class MaximumZeroSubmatrix {
     public static int maximumZeroSubmatrix(int[][] a) {
         int R = a.length;
         int C = a[0].length;
 
         int res = 0;
+        
+        // Maximum row containing a 1 in this column
         int[] d = new int[C];
         Arrays.fill(d, -1);
+
+        // Furthest left column for rectangle
         int[] d1 = new int[C];
+
+        // Furthest right column for rectangle
         int[] d2 = new int[C];
+
+        // stack
         int[] st = new int[C];
+
+        // Work down from top row, searching for largest rectangle
         for (int r = 0; r < R; ++r) {
+            // 1. Determine row to contain a '1'
             for (int c = 0; c < C; ++c)
                 if (a[r][c] == 1)
                     d[c] = r;
+
+            /**
+            2. Determine the left border positions
+          colm  01234567
+                00100001              000
+                00010000  ans =>      000
+                00010001              000 
+            */
             int size = 0;
             for (int c = 0; c < C; ++c) {
                 while (size > 0 && d[st[size - 1]] <= d[c]) --size;
-                d1[c] = size == 0 ? -1 : st[size - 1];
+                d1[c] = size == 0 ? -1 : st[size - 1];   // d1[4] = 3
                 st[size++] = c;
             }
+
+            // 3. Determine the right border positions
             size = 0;
             for (int c = C - 1; c >= 0; --c) {
                 while (size > 0 && d[st[size - 1]] <= d[c]) --size;
-                d2[c] = size == 0 ? C : st[size - 1];
+                d2[c] = size == 0 ? C : st[size - 1];   // d2[6] = 7
                 st[size++] = c;
             }
-            for (int j = 0; j < C; ++j) res = Math.max(res, (r - d[j]) * (d2[j] - d1[j] - 1));
+            
+            for (int j = 0; j < C; ++j) {
+                res = Math.max(res, (r - d[j]) * (d2[j] - d1[j] - 1));
+            }
         }
         return res;
     }
