@@ -19,11 +19,11 @@ public class Arrangements {
         for (int x : a) used[x] = true;
         int m = a.length;
         for (int i = m - 1; i >= 0; i--) {
-            used[a[i]] = false;
+            used[a[i]] = false;                          // IMP
             for (int j = a[i] + 1; j < n; j++) {
                 if (!used[j]) {
                     a[i++] = j;
-                    used[j] = true;
+                    used[j] = true;                     // IMP
                     for (int k = 0; i < m; k++) {
                         if (!used[k]) {
                             a[i++] = k;
