@@ -32,16 +32,18 @@ public class GraphCycleDetection {
         for (int v : graph[u]) {
             next[u] = v;
             if (color[v] == 0) {
+                // Cycle may start from here
                 int cycleStart = dfs(graph, v, color, next);
                 if (cycleStart != -1) {
                     return cycleStart;
                 }
             } else if (color[v] == 1) {
+                // cycle has started here
                 return v;
             }
         }
         color[u] = 2;
-        return -1;
+        return -1; // Indicates no cycle
     }
 
     // Usage example
