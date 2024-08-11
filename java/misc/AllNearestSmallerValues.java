@@ -2,6 +2,7 @@ package misc;
 
 import java.util.*;
 
+// https://www.geeksforgeeks.org/cses-solutions-nearest-smaller-values/
 public class AllNearestSmallerValues {
     // https://en.wikipedia.org/wiki/All_nearest_smaller_values
     public static int[] nsv(int[] a) {
