@@ -2,6 +2,36 @@ package combinatorics;
 
 import java.util.Arrays;
 
+/**
+
+Prerequisite:- https://github.com/cp-algorithms/cp-algorithms/blob/master/src/algebra/gray-code.md
+
+int gray_code (int n) {
+    return n ^ (n >> 1);
+}
+
+int count_bits (int n) {
+    int res = 0;
+    for (; n; n >>= 1)
+        res += n & 1;
+    return res;
+}
+
+void all_combinations (int n, int k) {
+    for (int i = 0; i < (1 << n); i++) {
+        int cur = gray_code (i); // gray code gives sequence that differ by 1
+        if (count_bits(cur) == k) {  // if k bits are set
+            for (int j = 0; j < n; j++) {
+                if (cur & (1 << j))  
+                    cout << j + 1;   // we would have k such (j+1) numbers
+            }
+            cout << "\n";
+        }
+    }
+}
+
+*/
+
 // https://en.wikipedia.org/wiki/Partial_permutation
 /**
 Given the natural numbers  N  and K , and considering a set of numbers from  1 to N. The task is to derive all subsets of size  K.
