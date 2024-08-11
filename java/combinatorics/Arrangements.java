@@ -3,7 +3,17 @@ package combinatorics;
 import java.util.Arrays;
 
 // https://en.wikipedia.org/wiki/Partial_permutation
+/**
+Given the natural numbers  N  and K , and considering a set of numbers from  1 to N. The task is to derive all subsets of size  K.
+*/
 public class Arrangements {
+    /**
+     n is 4 i.e [0,1,2,3]
+     a[] = [0, 1, 2] 
+             then nextArrangement is [0, 1, 3]
+             then nextArrangement is [0, 2, 1] , [0, 2, 3]
+             then nextArrangement is [0, 3, 1] etc used by line 27
+    */
     public static boolean nextArrangement(int[] a, int n) {
         boolean[] used = new boolean[n];
         for (int x : a) used[x] = true;
